@@ -1,0 +1,2 @@
+[   1, ["key" , [1,2, "string ," , false]], "a" , 2 , true , false, 1e5 ,  
+"new,Line\n", true, 36 ]
