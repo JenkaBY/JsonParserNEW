@@ -16,21 +16,22 @@ public class JsonFileReader implements JsonReader{
 		bufferedReader = new BufferedReader(new FileReader(filePath));
 	}
 	
+	/* 
+	 * Возвращает прочитанную строку из файла в виде одной строки. Убирает переносы строк.
+	 */
+	@Override
+	public String getResult() throws IOException {
+		readFile();
+		return raw.toString();
+	}
+	
+
 	private void readFile() throws IOException{
 		String line;
 		while ((line = bufferedReader.readLine()) != null){
 			raw.append(line);
 		}
 		this.close();
-	}
-	
-	/* (non-Javadoc)
-	 * @see by.intexsoft.jsonparser.reader.JsonReader#getResult()
-	 */
-	@Override
-	public String getResult() throws IOException {
-		readFile();
-		return raw.toString();
 	}
 	
 	private void close() throws IOException{

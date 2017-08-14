@@ -6,8 +6,7 @@ package by.intexsoft.jsonparser.parser.validator.impl;
 import by.intexsoft.jsonparser.parser.validator.helper.Element;
 
 /**
- * @author JenkaBY
- *
+ * Класс для валидации JsonElement. Требует реализации.
  */
 public class JsonValidator extends AbstractSimpleValidator {
 

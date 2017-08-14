@@ -1,4 +1,4 @@
-package by.intexsoft.jsonparser.parser.element;
+package by.intexsoft.jsonparser.parser;
 
 import by.intexsoft.jsonparser.exception.NotValidJsonException;
 
@@ -17,7 +17,7 @@ public class NumberParser extends BaseParser {
 	public String getParsedElement() throws NotValidJsonException {
 		if (wasParsed)
 			return parsedElement;
-		currentPosition = chars.contains(SPACE) ? chars.indexOf(SPACE) : chars.size() - 1;
+		currentPosition = parsedString.contains(SPACE) ? parsedString.indexOf(SPACE) : parsedString.size() - 1;
 		setRestPart();
 		setParsedElement();
 //		parsedElement = UtilityMethods.join(chars.subList(getInitialPosition(), currentPosition));

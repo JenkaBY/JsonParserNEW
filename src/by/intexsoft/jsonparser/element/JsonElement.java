@@ -10,11 +10,20 @@ public class JsonElement extends JsonBaseElement {
 		keys = new LinkedList<>();
 	}
 
+	
+	/**
+	 * Добавляет пары ключ и значение. 
+	 * @param key StringElement 
+	 * @param json JsonBaseElement
+	 */
 	public void add(StringElement key, JsonBaseElement json) {
 		keys.add(key);
 		getValues().add(json);
 	}
 
+	/* 
+	 * Метод ничего не делает. Не следуюет его использовать для JsonElement
+	 */
 	@Override
 	public void setValue(Object value) {
 	}
@@ -36,7 +45,7 @@ public class JsonElement extends JsonBaseElement {
 		}
 		return joined.toString();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public LinkedList<JsonBaseElement> getValues() {
 		return (LinkedList<JsonBaseElement>) value;

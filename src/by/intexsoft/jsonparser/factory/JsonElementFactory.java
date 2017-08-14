@@ -1,6 +1,3 @@
-/**
- * 
- */
 package by.intexsoft.jsonparser.factory;
 
 import by.intexsoft.jsonparser.element.ArrayElement;
@@ -14,8 +11,7 @@ import by.intexsoft.jsonparser.element.TrueElement;
 import by.intexsoft.jsonparser.parser.validator.helper.Element;
 
 /**
- * @author YKuzmich
- *
+ * Фабрика - синглтон, создающая JsonElement по согласно типу Element. 
  */
 public class JsonElementFactory {
 private static JsonElementFactory factory;

@@ -23,6 +23,6 @@ public class ArrayElement extends JsonBaseElement {
 	@SuppressWarnings("unchecked")
 	@Override
 	public String toString(){
-		return "[" + UtilityMethods.split(((List<JsonBaseElement>) value)) + "]";
+		return "[" + UtilityMethods.joinByComma(((List<JsonBaseElement>) value)) + "]";
 	}
 }

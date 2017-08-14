@@ -1,4 +1,4 @@
-package by.intexsoft.jsonparser.parser.element;
+package by.intexsoft.jsonparser.parser;
 
 import by.intexsoft.jsonparser.element.FalseElement;
 import by.intexsoft.jsonparser.element.JsonBaseElement;

@@ -4,6 +4,10 @@ import by.intexsoft.jsonparser.exception.UnsupportedMethodException;
 import by.intexsoft.jsonparser.parser.validator.IValidator;
 import by.intexsoft.jsonparser.parser.validator.helper.Element;
 
+
+/**
+ *	Абстрактный класс валидатора. Реализует базовую функциональность валитора для JsonElement.
+ */
 public abstract class AbstractSimpleValidator implements IValidator {
 	private Element element;
 
@@ -11,6 +15,9 @@ public abstract class AbstractSimpleValidator implements IValidator {
 		this.element = element;
 	}
 
+	/* 
+	 * Проверяет валидная ли переданная строка. Проверяет первый, последний символ и то, что между ними
+	 */
 	@Override
 	public boolean isValid(String parsedElement) throws UnsupportedMethodException {
 		return IValidator.super.isValid(parsedElement) && startsWith(parsedElement) && endsWith(parsedElement) && validateLength(parsedElement)
@@ -18,7 +25,6 @@ public abstract class AbstractSimpleValidator implements IValidator {
 	}
 
 	protected boolean validateMiddle(String parsedElement) {
-		// TODO Implement me
 		return true;
 	}
 

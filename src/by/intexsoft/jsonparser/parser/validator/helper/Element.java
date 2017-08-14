@@ -7,6 +7,10 @@ import java.util.Set;
 import by.intexsoft.jsonparser.exception.UnsupportedMethodException;
 import by.intexsoft.jsonparser.util.UtilityMethods;
 
+/**
+ * Перечисление которое определяет тип элемента. Содержит некоторые методы,
+ * позволяющие первый и последний возможные символы, минимально допустимую длину элемента
+ */
 public enum Element {
 	ARRAY, JSON, NUMBER, STRING, FALSE, TRUE, NULL;
 
@@ -51,6 +55,13 @@ public enum Element {
 		nullEndsWith = new HashSet<>(Arrays.asList('l'));
 	}
 
+	/**
+	 * Определяет элемент переданному символу
+	 * 
+	 * @param character
+	 *            символ по которому происходит определение Element
+	 * @return Element
+	 */
 	public static Element getByFirst(Character character) {
 		if (jsonStartsWith.contains(character))
 			return JSON;
@@ -69,6 +80,12 @@ public enum Element {
 		return null;
 	}
 
+	/**
+	 * Возвращает набор первых возможных символов для конкретного элемента
+	 * 
+	 * @return Set<Character> набор первых возможных символов для конкретного
+	 *         элемента
+	 */
 	public Set<Character> getFirstPossibleCharacters() {
 		switch (this) {
 		case JSON:
@@ -91,6 +108,12 @@ public enum Element {
 		return null;
 	}
 
+	/**
+	 * Возвращает набор последних возможных символов для конкретного элемента
+	 * 
+	 * @return Set<Character> набор последних возможных символов для конкретного
+	 *         элемента
+	 */
 	public Set<Character> getLastPossibleCharacters() {
 		switch (this) {
 		case JSON:
@@ -113,6 +136,12 @@ public enum Element {
 		return null;
 	}
 
+	/**
+	 * Определяет минимальную возможную длину JsonObject для конкретного
+	 * элемента
+	 * 
+	 * @return int минимальную возможную длину
+	 */
 	public int getMinPossibleLength() throws UnsupportedMethodException {
 		switch (this) {
 		case JSON:
@@ -129,11 +158,13 @@ public enum Element {
 	}
 
 	/**
-	 * Определяет позицию последнего элемента в его названии элемента. Счет начинается с 0. Например, метод для FALSE вернет 4, для NULL - 3
+	 * Определяет позицию последнего элемента в его названии элемента. Счет
+	 * начинается с 0. Например, метод для FALSE вернет 4, для NULL - 3
 	 * 
 	 * @return int позиция последнего элемента
 	 * @throws UnsupportedMethodException
-	 *             если метод вызывается у объектов отличных от FALSE, TRUE, NULL
+	 *             если метод вызывается у объектов отличных от FALSE, TRUE,
+	 *             NULL
 	 */
 	public int getPositionLastCharacter() throws UnsupportedMethodException {
 		if (!Arrays.asList(new Element[] { FALSE, TRUE, NULL }).contains(this)) {
@@ -141,10 +172,10 @@ public enum Element {
 		}
 		return name().length() - 1;
 	}
-	
+
 	/**
 	 * 
-	 * @return int 
+	 * @return Character последний символ у строки содержащей ARRAY или JSON
 	 * @throws UnsupportedMethodException
 	 *             если метод вызывается у объектов отличных от ARRAY, JSON
 	 */
@@ -154,14 +185,14 @@ public enum Element {
 
 	/**
 	 * 
-	 * @return int 
+	 * @return Character первый символ у строки содержащей ARRAY или JSON
 	 * @throws UnsupportedMethodException
 	 *             если метод вызывается у объектов отличных от ARRAY, JSON
 	 */
 	public Character getFirstCharacter() throws UnsupportedMethodException {
 		return getFirstCharacterFrom(getFirstPossibleCharacters());
 	}
-	
+
 	private Character getFirstCharacterFrom(Set<Character> chars) throws UnsupportedMethodException {
 		if (!Arrays.asList(new Element[] { ARRAY, JSON, STRING }).contains(this)) {
 			throw new UnsupportedMethodException();

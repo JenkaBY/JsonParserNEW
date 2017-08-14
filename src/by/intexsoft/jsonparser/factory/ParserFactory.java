@@ -1,16 +1,18 @@
 package by.intexsoft.jsonparser.factory;
 
 import by.intexsoft.jsonparser.exception.UnsupportedMethodException;
-import by.intexsoft.jsonparser.parser.element.ArrayParser;
-import by.intexsoft.jsonparser.parser.element.BaseParser;
-import by.intexsoft.jsonparser.parser.element.FalseParser;
-import by.intexsoft.jsonparser.parser.element.JsonParser;
-import by.intexsoft.jsonparser.parser.element.NullParser;
-import by.intexsoft.jsonparser.parser.element.NumberParser;
-import by.intexsoft.jsonparser.parser.element.StringParser;
-import by.intexsoft.jsonparser.parser.element.TrueParser;
+import by.intexsoft.jsonparser.parser.ArrayParser;
+import by.intexsoft.jsonparser.parser.BaseParser;
+import by.intexsoft.jsonparser.parser.FalseParser;
+import by.intexsoft.jsonparser.parser.JsonParser;
+import by.intexsoft.jsonparser.parser.NullParser;
+import by.intexsoft.jsonparser.parser.NumberParser;
+import by.intexsoft.jsonparser.parser.StringParser;
+import by.intexsoft.jsonparser.parser.TrueParser;
 import by.intexsoft.jsonparser.parser.validator.helper.Element;
-
+/**
+ * Фабрика - синглтон, создающая BaseParser по согласно типу переданной строке. 
+ */
 public class ParserFactory {
 private static ParserFactory factory;
 	

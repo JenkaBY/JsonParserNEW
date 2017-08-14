@@ -4,7 +4,7 @@ import by.intexsoft.jsonparser.element.JsonBaseElement;
 import by.intexsoft.jsonparser.exception.NotValidJsonException;
 import by.intexsoft.jsonparser.exception.UnsupportedMethodException;
 import by.intexsoft.jsonparser.factory.ParserFactory;
-import by.intexsoft.jsonparser.parser.element.BaseParser;
+import by.intexsoft.jsonparser.parser.BaseParser;
 import by.intexsoft.jsonparser.reader.impl.JsonFileReader;
 import by.intexsoft.jsonparser.util.UtilityMethods;
 

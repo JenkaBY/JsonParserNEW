@@ -1,4 +1,4 @@
-package by.intexsoft.jsonparser.parser.element;
+package by.intexsoft.jsonparser.parser;
 
 import by.intexsoft.jsonparser.exception.NotValidJsonException;
 import by.intexsoft.jsonparser.util.UtilityMethods;
@@ -32,8 +32,8 @@ public class StringParser extends BaseParser {
 	public String getParsedElement() throws NotValidJsonException {
 		if (wasParsed)
 			return parsedElement;
-		for (currentPosition = getInitialPosition(); currentPosition < chars.size(); currentPosition++) {
-			if (isLastPossibleCharacter(chars.get(currentPosition)) && !isPreviousCharEscape()) {
+		for (currentPosition = getInitialPosition(); currentPosition < parsedString.size(); currentPosition++) {
+			if (isLastPossibleCharacter(parsedString.get(currentPosition)) && !isPreviousCharEscape()) {
 				setRestPart();
 				setParsedElement();
 				break;
@@ -44,7 +44,7 @@ public class StringParser extends BaseParser {
 	
 	@Override
 	protected void setParsedElement() {
-		parsedElement = UtilityMethods.join(chars.subList(initialPosition, currentPosition));
+		parsedElement = UtilityMethods.join(parsedString.subList(initialPosition, currentPosition));
 		wasParsed = true;
 	}
 }
