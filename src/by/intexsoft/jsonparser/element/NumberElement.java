@@ -7,7 +7,7 @@ package by.intexsoft.jsonparser.element;
  * @author JenkaBY
  *
  */
-public class NumberElement extends JsonBaseElement {
+public final class NumberElement extends JsonBaseElement {
 
 	@Override
 	public boolean isNumber() {

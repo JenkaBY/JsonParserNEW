@@ -1,5 +1,6 @@
 package by.intexsoft.jsonparser.util;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -16,15 +17,29 @@ public class UtilityMethods {
 	 * @param objects
 	 * @return String все соединенные элементы списка
 	 */
-	public static <T> String join(List<T> objects) {
-		StringBuilder sb = new StringBuilder();
-		objects.forEach(ch -> sb.append(ch));
-		return sb.toString().trim();
+	public static <T> String join(Collection<T> objects) {
+		return join(objects, "");
 	}
-
+	
 	/**
-	 * Убирает переносы строк (\r, \n). Не учитывает такие же символы,
-	 * находящиеся в строковых литералах.
+	 * Метод склеивает переданный список с помощью запятых. Пример {'a', 'b', 'c'} ->
+	 * "a,b,c"
+	 * 
+	 * @param objects
+	 *            список объектов которые требуется объединить с помощью запятыми
+	 * @return String строка объектов, разделенных запятыми
+	 */
+	public static <T> String joinByComma(Collection<T> objects) {
+		return join(objects, ",");
+	}
+	
+	public static <T> String join(Collection<T> array, String by) {
+		return array.stream().map(Object::toString).collect(Collectors.joining(by));
+	}
+	
+	/**
+	 * Убирает переносы строк (\r, \n). Не учитывает такие же символы, находящиеся в
+	 * строковых литералах.
 	 * 
 	 * @param text
 	 *            текст из которого должны быть убраны символы
@@ -43,19 +58,6 @@ public class UtilityMethods {
 	 */
 	public static Character getFirstCharacterFrom(Set<Character> chars) {
 		return chars.iterator().next();
-	}
-
-	/**
-	 * Метод склеивает переданный список с помощью запятых. Пример{'a', 'b',
-	 * 'c'} -> "a,b,c"
-	 * 
-	 * @param array
-	 *            список объектов которые требуется объединить с помощью
-	 *            запятыми
-	 * @return String строка объектов, разделенных запятыми
-	 */
-	public static <T> String joinByComma(List<T> array) {
-		return array.stream().map(Object::toString).collect(Collectors.joining(","));
 	}
 
 	/**

@@ -4,15 +4,18 @@ import java.util.List;
 
 import by.intexsoft.jsonparser.util.UtilityMethods;
 
-public class ArrayElement extends JsonBaseElement {
+/**
+ * @author JenkaBY
+ *
+ */
+public final class ArrayElement extends JsonBaseElement {
 	
+	/**
+	 * Добавляет в список переданный JsonBaseElement.
+	 */
 	@SuppressWarnings("unchecked")
 	public void add(JsonBaseElement json){
-		((List<JsonBaseElement>) value).add(json);
-	}
-	
-	@Override
-	public void setValue(Object value){
+		((List<JsonBaseElement>) getValue()).add(json);
 	}
 	
 	@Override
@@ -20,9 +23,30 @@ public class ArrayElement extends JsonBaseElement {
 		return true;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public String toString(){
-		return "[" + UtilityMethods.joinByComma(((List<JsonBaseElement>) value)) + "]";
+		return "[" + UtilityMethods.joinByComma(getList()) + "]";
+	}
+	
+	/**
+	 * Получает JsonBaseElement элемент по номеру индекса
+	 * @param index элемента массива, который требуется получить
+	 * @return JsonBaseElement соответсвтующий индексу в списке
+	 */
+	public JsonBaseElement getBy(int index) {
+		return getList().get(index);
+	}
+	
+	/**
+	 * Метод служит для получения размера списка JsonElement
+	 * @return 
+	 */
+	public int size() {
+		return getList().size();
+	}
+	
+	@SuppressWarnings("unchecked")
+	private List<JsonBaseElement> getList(){
+		return (List<JsonBaseElement>) value;
 	}
 }

@@ -48,7 +48,9 @@ public abstract class BaseParser {
 	 */
 	public BaseParser(String parsedElement) {
 		parsedElement = UtilityMethods.removeExtraCharacters(parsedElement);
-		parsedString = parsedElement.trim().chars().mapToObj(c -> (char) c).collect(Collectors.toList());
+		parsedString = parsedElement.trim().chars()
+				.mapToObj(c -> (char) c)
+				.collect(Collectors.toList());
 		validator = ValidatorFactory.getInstance().getValidator(parsedElement);
 	}
 

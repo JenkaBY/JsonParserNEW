@@ -1,58 +1,68 @@
 package by.intexsoft.jsonparser.parser.validator.helper;
 
+import static java.util.Collections.singletonList;
+
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import by.intexsoft.jsonparser.exception.UnsupportedMethodException;
 import by.intexsoft.jsonparser.util.UtilityMethods;
 
 /**
  * Перечисление которое определяет тип элемента. Содержит некоторые методы,
- * позволяющие первый и последний возможные символы, минимально допустимую длину элемента
+ * позволяющие первый и последний возможные символы, минимально допустимую длину
+ * элемента
  */
 public enum Element {
 	ARRAY, JSON, NUMBER, STRING, FALSE, TRUE, NULL;
 
-	private static Set<Character> arrayStartsWith;
-	private static Set<Character> arrayEndsWith;
+	private final static Set<Character> ARRAY_STARTS_WITH;
+	private final static Set<Character> ARRAY_ENDS_WITH;
 
-	private static Set<Character> jsonStartsWith;
-	private static Set<Character> jsonEndsWith;
+	private final static Set<Character> JSON_STARTS_WITH;
+	private final static Set<Character> JSON_ENDS_WITH;
 
-	private static Set<Character> numberStartsWith;
-	private static Set<Character> numberEndsWith;
+	private final static Set<Character> NUMBER_STARTS_WITH;
+	private final static Set<Character> NUMBER_ENDS_WITH;
 
-	private static Set<Character> stringStartsOrEndsWith;
-	private static Set<Character> falseStartsWith;
-	private static Set<Character> trueStartsWith;
-	private static Set<Character> nullStartsWith;
-	private static Set<Character> falseEndsWith;
-	private static Set<Character> trueEndsWith;
-	private static Set<Character> nullEndsWith;
+	private final static Set<Character> STRING_STARTS_OR_ENDS_WITH;
+	private final static Set<Character> FALSE_STARTS_WITH;
+	private final static Set<Character> TRUE_STARTS_WITH;
+	private final static Set<Character> NULL_STARTS_WITH;
+	private final static Set<Character> FALSE_ENDS_WITH;
+	private final static Set<Character> TRUE_ENDS_WITH;
+	private final static Set<Character> NULL_ENDS_WITH;
 
 	static {
-		arrayStartsWith = new HashSet<>(Arrays.asList('['));
-		arrayEndsWith = new HashSet<>(Arrays.asList(']'));
+		ARRAY_STARTS_WITH = new HashSet<>(singletonList('['));
+		ARRAY_ENDS_WITH = new HashSet<>(singletonList(']'));
 
-		jsonStartsWith = new HashSet<>(Arrays.asList('{'));
-		jsonEndsWith = new HashSet<>(Arrays.asList('}'));
+		JSON_STARTS_WITH = new HashSet<>(singletonList('{'));
+		JSON_ENDS_WITH = new HashSet<>(singletonList('}'));
 
-		Set<Character> numbers = new HashSet<>(Arrays.asList('0', '1', '2', '3', '4', '5', '6', '7', '8', '9'));
-		numberStartsWith = new HashSet<>(numbers);
-		numberStartsWith.add('-');
-		numberEndsWith = numbers;
+		final List<Character> chars = IntStream.range(0, 10)
+				.boxed()
+				.map(i -> new Character(String.valueOf(i).charAt(0)))
+				.collect(Collectors.toList());
+		Set<Character> numbers = new HashSet<>(chars);
+		NUMBER_STARTS_WITH = new HashSet<>(numbers);
+		NUMBER_STARTS_WITH.add('-');
+		NUMBER_ENDS_WITH = numbers;
 
-		stringStartsOrEndsWith = new HashSet<>(Arrays.asList('"'));
+		STRING_STARTS_OR_ENDS_WITH = new HashSet<>(singletonList('"'));
 
-		falseStartsWith = new HashSet<>(Arrays.asList('f'));
-		falseEndsWith = new HashSet<>(Arrays.asList('e'));
+		FALSE_STARTS_WITH = new HashSet<>(singletonList('f'));
+		FALSE_ENDS_WITH = new HashSet<>(singletonList('e'));
 
-		trueStartsWith = new HashSet<>(Arrays.asList('t'));
-		trueEndsWith = falseEndsWith;
+		TRUE_STARTS_WITH = new HashSet<>(singletonList('t'));
+		TRUE_ENDS_WITH = FALSE_ENDS_WITH;
 
-		nullStartsWith = new HashSet<>(Arrays.asList('n'));
-		nullEndsWith = new HashSet<>(Arrays.asList('l'));
+		NULL_STARTS_WITH = new HashSet<>(singletonList('n'));
+		NULL_ENDS_WITH = new HashSet<>(singletonList('l'));
 	}
 
 	/**
@@ -63,19 +73,19 @@ public enum Element {
 	 * @return Element
 	 */
 	public static Element getByFirst(Character character) {
-		if (jsonStartsWith.contains(character))
+		if (JSON_STARTS_WITH.contains(character))
 			return JSON;
-		if (arrayStartsWith.contains(character))
+		if (ARRAY_STARTS_WITH.contains(character))
 			return ARRAY;
-		if (numberStartsWith.contains(character))
+		if (NUMBER_STARTS_WITH.contains(character))
 			return NUMBER;
-		if (stringStartsOrEndsWith.contains(character))
+		if (STRING_STARTS_OR_ENDS_WITH.contains(character))
 			return STRING;
-		if (falseStartsWith.contains(character))
+		if (FALSE_STARTS_WITH.contains(character))
 			return FALSE;
-		if (trueStartsWith.contains(character))
+		if (TRUE_STARTS_WITH.contains(character))
 			return TRUE;
-		if (nullStartsWith.contains(character))
+		if (NULL_STARTS_WITH.contains(character))
 			return NULL;
 		return null;
 	}
@@ -89,23 +99,22 @@ public enum Element {
 	public Set<Character> getFirstPossibleCharacters() {
 		switch (this) {
 		case JSON:
-			return jsonStartsWith;
+			return JSON_STARTS_WITH;
 		case ARRAY:
-			return arrayStartsWith;
+			return ARRAY_STARTS_WITH;
 		case NUMBER:
-			return numberStartsWith;
+			return NUMBER_STARTS_WITH;
 		case STRING:
-			return stringStartsOrEndsWith;
+			return STRING_STARTS_OR_ENDS_WITH;
 		case FALSE:
-			return falseStartsWith;
+			return FALSE_STARTS_WITH;
 		case TRUE:
-			return trueStartsWith;
+			return TRUE_STARTS_WITH;
 		case NULL:
-			return nullStartsWith;
+			return NULL_STARTS_WITH;
 		default:
-			break;
+			return null;
 		}
-		return null;
 	}
 
 	/**
@@ -117,19 +126,19 @@ public enum Element {
 	public Set<Character> getLastPossibleCharacters() {
 		switch (this) {
 		case JSON:
-			return jsonEndsWith;
+			return JSON_ENDS_WITH;
 		case ARRAY:
-			return arrayEndsWith;
+			return ARRAY_ENDS_WITH;
 		case NUMBER:
-			return numberEndsWith;
+			return NUMBER_ENDS_WITH;
 		case STRING:
-			return stringStartsOrEndsWith;
+			return STRING_STARTS_OR_ENDS_WITH;
 		case FALSE:
-			return falseEndsWith;
+			return FALSE_ENDS_WITH;
 		case TRUE:
-			return trueEndsWith;
+			return TRUE_ENDS_WITH;
 		case NULL:
-			return nullEndsWith;
+			return NULL_ENDS_WITH;
 		default:
 			break;
 		}
@@ -137,8 +146,7 @@ public enum Element {
 	}
 
 	/**
-	 * Определяет минимальную возможную длину JsonObject для конкретного
-	 * элемента
+	 * Определяет минимальную возможную длину JsonObject для конкретного элемента
 	 * 
 	 * @return int минимальную возможную длину
 	 */
@@ -163,8 +171,7 @@ public enum Element {
 	 * 
 	 * @return int позиция последнего элемента
 	 * @throws UnsupportedMethodException
-	 *             если метод вызывается у объектов отличных от FALSE, TRUE,
-	 *             NULL
+	 *             если метод вызывается у объектов отличных от FALSE, TRUE, NULL
 	 */
 	public int getPositionLastCharacter() throws UnsupportedMethodException {
 		if (!Arrays.asList(new Element[] { FALSE, TRUE, NULL }).contains(this)) {

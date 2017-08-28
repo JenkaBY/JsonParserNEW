@@ -16,7 +16,7 @@ import by.intexsoft.jsonparser.parser.validator.impl.TrueValidator;
 /**
  * Фабрика - синглтон, создающая IValidator по согласно типу переданной строке. 
  */
-public class ValidatorFactory {
+public final class ValidatorFactory {
 	private static ValidatorFactory factory;
 	
 	private ValidatorFactory(){
@@ -48,8 +48,7 @@ public class ValidatorFactory {
 		case NULL:
 			return new NullValidator(element);
 		default:
-			break;
+			return null;
 		}
-		return null;
 	}
 }

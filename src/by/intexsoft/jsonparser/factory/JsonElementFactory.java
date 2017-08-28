@@ -11,21 +11,21 @@ import by.intexsoft.jsonparser.element.TrueElement;
 import by.intexsoft.jsonparser.parser.validator.helper.Element;
 
 /**
- * Фабрика - синглтон, создающая JsonElement по согласно типу Element. 
+ * Фабрика - синглтон, создающая JsonElement по согласно типу Element.
  */
-public class JsonElementFactory {
-private static JsonElementFactory factory;
-	
-	private JsonElementFactory(){
+public final class JsonElementFactory {
+	private static JsonElementFactory instance;
+
+	private JsonElementFactory() {
 	}
 
 	public static JsonElementFactory getInstance() {
-		if (factory == null){
-			factory = new JsonElementFactory();
+		if (instance == null) {
+			instance = new JsonElementFactory();
 		}
-		return factory;
+		return instance;
 	}
-	
+
 	public JsonBaseElement getJsonElement(Element element) {
 		switch (element) {
 		case ARRAY:

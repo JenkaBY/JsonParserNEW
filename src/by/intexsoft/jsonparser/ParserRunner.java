@@ -1,6 +1,7 @@
 package by.intexsoft.jsonparser;
 
 import by.intexsoft.jsonparser.element.JsonBaseElement;
+import by.intexsoft.jsonparser.element.JsonElement;
 import by.intexsoft.jsonparser.exception.NotValidJsonException;
 import by.intexsoft.jsonparser.exception.UnsupportedMethodException;
 import by.intexsoft.jsonparser.factory.ParserFactory;
@@ -44,6 +45,12 @@ public class ParserRunner {
 		BaseParser parser = ParserFactory.getInstance().getParser(UtilityMethods.removeExtraCharacters(json));
 		JsonBaseElement jsonElement = parser.getJsonElement();
 		print(jsonElement.getClass() + " : ", jsonElement);
+		
+		if (jsonElement.isJson()) {
+			String key = "glossary";
+			JsonBaseElement value = ((JsonElement) jsonElement).getByKey(key);
+			print(key + " - ", value);
+		}
 	}
 
 	public static void printParsedElement(Object object) {

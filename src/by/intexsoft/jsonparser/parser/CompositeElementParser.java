@@ -17,7 +17,7 @@ import by.intexsoft.jsonparser.util.UtilityMethods;
 public abstract class CompositeElementParser extends BaseParser {
 	protected Character spliterator = ',';
 	protected List<String> parsedElements;
-	// Счетчик открывающихся и закрывающихся скобок и кавычек.
+	// Счетчик открывающих и закрывающих скобок и кавычек.
 	protected Map<Character, Integer> closedOpenedCharacterCounters;
 	protected static List<Character> openedClosedChars;
 	protected boolean wasSplitted;

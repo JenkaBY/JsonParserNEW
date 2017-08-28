@@ -3,12 +3,12 @@ package by.intexsoft.jsonparser.element;
 import java.util.LinkedList;
 
 /**
- * Базовый класс JsonBaseElement. От него должны наследоваться все остальные JsonElement
+ * Базовый класс JsonBaseElement. От него наследуются все остальные классы
+ * JsonElement
  */
-public class JsonBaseElement {
+public abstract class JsonBaseElement {
 	protected Object value;
 
-	
 	/**
 	 * Если класс наследник Array или Json создается список JsonBaseElement.
 	 */

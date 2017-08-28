@@ -11,9 +11,9 @@ import by.intexsoft.jsonparser.parser.StringParser;
 import by.intexsoft.jsonparser.parser.TrueParser;
 import by.intexsoft.jsonparser.parser.validator.helper.Element;
 /**
- * Фабрика - синглтон, создающая BaseParser по согласно типу переданной строке. 
+ * Фабрика - синглтон, создающая BaseParser согласно типу переданной строке. 
  */
-public class ParserFactory {
+public final class ParserFactory {
 private static ParserFactory factory;
 	
 	private ParserFactory(){
@@ -45,8 +45,7 @@ private static ParserFactory factory;
 		case NULL:
 			return new NullParser(parsedElement);
 		default:
-			break;
+			return null;
 		}
-		return null;
 	}
 }

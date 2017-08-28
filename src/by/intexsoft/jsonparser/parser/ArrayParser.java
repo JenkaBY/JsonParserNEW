@@ -12,7 +12,6 @@ public class ArrayParser extends CompositeElementParser {
 
 	public ArrayParser(String parsedElement) throws UnsupportedMethodException {
 		super(parsedElement);
-
 	}
 
 	@Override

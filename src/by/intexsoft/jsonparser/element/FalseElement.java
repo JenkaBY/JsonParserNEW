@@ -3,11 +3,13 @@
  */
 package by.intexsoft.jsonparser.element;
 
+import static java.lang.Boolean.FALSE;
+
 /**
  * @author JenkaBY
  *
  */
-public class FalseElement extends JsonBaseElement {
+public final class FalseElement extends JsonBaseElement {
 
 	public boolean equals(Object o) {
 		if (o == null || !(o instanceof FalseElement)) {
@@ -23,7 +25,7 @@ public class FalseElement extends JsonBaseElement {
 	
 	@Override
 	public String toString() {
-		return "false";
+		return FALSE.toString();
 	}
 
 	@Override
